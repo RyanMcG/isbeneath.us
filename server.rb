@@ -10,16 +10,16 @@ class BeneathApp < Sinatra::Base
   end
 
   get "/worsers/:worst" do
-    worser(params[:worst])
+    self.worser(params[:worst])
   end
 
   get "/" do
-    worser(random_worser)
+    self.worser(random_worser)
   end
 
   subdomain do
     get "/" do
-      worser(subdomain)
+      self.worser(subdomain)
     end
   end
 end
