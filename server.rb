@@ -1,5 +1,5 @@
 class BeneathApp < Sinatra::Base
   get "/" do
-    "Hello Bundler"
+    "Nothing is beneath us."
   end
 end
