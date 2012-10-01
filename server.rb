@@ -1,6 +1,10 @@
 class BeneathApp < Sinatra::Base
   register Sinatra::Subdomain
 
+  def initialize
+    Mongoid.load!("mongoid.yml", BeneathApp.environment)
+  end
+
   def worser(worst)
     "#{worst} is the worst."
   end
