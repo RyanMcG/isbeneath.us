@@ -18,12 +18,12 @@ class BeneathApp < Sinatra::Base
   def worser(worst)
     @worst = worst
     sub = SUBS[worst.to_sym]
-    # The tag line is HTML escaped in the view.
-    @tag_line = sub[:tag]
-    @img_url = URI.encode(sub[:img])
-    if @tag_line.nil?
+    if sub.nil?
       not_found { "We're sorry, but that sub does not exist." }
     else
+      # The tag line is HTML escaped in the view.
+      @tag_line = sub[:tag]
+      @img_url = URI.encode(sub[:img])
       haml :index
     end
   end
