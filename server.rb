@@ -1,5 +1,6 @@
 class BeneathApp < Sinatra::Base
   register Sinatra::Subdomain
+  set :haml, format: :html5
 
   def initialize
     Mongoid.load!("mongoid.yml", BeneathApp.environment)
