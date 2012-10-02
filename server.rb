@@ -3,6 +3,7 @@ class BeneathApp < Sinatra::Base
   set :haml, format: :html5
 
   IMG_DIR = "http://dl.dropbox.com/u/1378350/ibu-images/"
+  CANONICAL_NAME = 'isbeneath.us'
   SUBS = {
     avatar: {
       tag: "MLP > Avatar",
@@ -16,7 +17,7 @@ class BeneathApp < Sinatra::Base
 
   def worser(worst)
     @worst = worst
-    sub = BeneathApp::SUBS[worst.to_sym]
+    sub = SUBS[worst.to_sym]
     # The tag line is HTML escaped in the view.
     @tag_line = sub[:tag]
     @img_url = URI.encode(sub[:img])
@@ -28,12 +29,12 @@ class BeneathApp < Sinatra::Base
   end
 
   def random_worser
-    BeneathApp::SUBS.keys[rand(BeneathApp::SUBS.size)]
+    SUBS.keys[rand(SUBS.size)]
   end
 
   def redirect_to_sub(worst)
     if BeneathApp.production?
-      redirect "http://#{worst}.isbeneath.us/"
+      redirect "http://#{worst}.#{CANONICAL_NAME}/"
     else
       redirect to("/worser/#{worst}")
     end
