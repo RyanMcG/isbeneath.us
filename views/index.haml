@@ -65,4 +65,4 @@
 
 %body
   %h1#tagline&= @tag_line
-  %a#rand.btn-custom(href="/") Random
+  %a#rand.btn-custom(href="#{BeneathApp.production? ? "http://#{CANONICAL_NAME}/" : '/'}") Random
