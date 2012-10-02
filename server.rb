@@ -18,13 +18,30 @@ class BeneathApp < Sinatra::Base
     self.worser(params[:worst])
   end
 
-  get "/" do
-    self.worser(random_worser)
+  def redirect_to_sub(worst)
+    if BeneathApp.production?
+      redirect "http://#{worst}.isbeneath.us/"
+    else
+      redirect to("/worser/#{worst}")
+    end
   end
 
   subdomain do
     get "/" do
       self.worser(subdomain)
     end
+  end
+
+  get "/worser/:worst" do
+    worst = params[:worst]
+    if BeneathApp.production?
+      redirect_to_sub worst
+    else
+      self.worser(worst)
+    end
+  end
+
+  get "/" do
+    redirect_to_sub random_worser
   end
 end
