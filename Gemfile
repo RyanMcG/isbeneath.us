@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 gem "sinatra", :require => "sinatra/base"
 gem "sinatra-subdomain", :require => "sinatra/subdomain"
+gem 'haml', :require => 'haml'
 gem 'mongoid'
 gem 'carrierwave-mongoid'
 
