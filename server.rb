@@ -2,20 +2,33 @@ class BeneathApp < Sinatra::Base
   register Sinatra::Subdomain
   set :haml, format: :html5
 
-  def initialize
-    Mongoid.load!("mongoid.yml", BeneathApp.environment)
-  end
+  IMG_DIR = "http://dl.dropbox.com/u/1378350/ibu-images/"
+  SUBS = {
+    avatar: {
+      tag: "MLP > Avatar",
+      img: IMG_DIR + 'mlp.jpg'
+    },
+    mlp: {
+        tag: "Avatar > MLP",
+        img: 'http://www.adventuresinpoortaste.com/wp-content/uploads/2012/02/avatarheader.jpg'
+    }
+  }
 
   def worser(worst)
-    "#{worst} is the worst."
+    @worst = worst
+    sub = BeneathApp::SUBS[worst.to_sym]
+    # The tag line is HTML escaped in the view.
+    @tag_line = sub[:tag]
+    @img_url = URI.encode(sub[:img])
+    if @tag_line.nil?
+      not_found { "We're sorry, but that sub does not exist." }
+    else
+      haml :index
+    end
   end
 
   def random_worser
-    "derp"
-  end
-
-  get "/worsers/:worst" do
-    self.worser(params[:worst])
+    BeneathApp::SUBS.keys[rand(BeneathApp::SUBS.size)]
   end
 
   def redirect_to_sub(worst)
