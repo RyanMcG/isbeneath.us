@@ -12,6 +12,10 @@ class BeneathApp < Sinatra::Base
     mlp: {
         tag: "Avatar > MLP",
         img: 'http://www.adventuresinpoortaste.com/wp-content/uploads/2012/02/avatarheader.jpg'
+    },
+    space: {
+        tag: ". . . and above us and all other directions.",
+        img: 'http://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Earth-moon.jpg/1280px-Earth-moon.jpg'
     }
   }
 
